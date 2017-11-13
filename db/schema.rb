@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171113133528) do
+ActiveRecord::Schema.define(version: 20171113162856) do
 
   create_table "languages", force: :cascade do |t|
     t.string "name"
@@ -22,6 +22,22 @@ ActiveRecord::Schema.define(version: 20171113133528) do
   create_table "languages_users", id: false, force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "language_id", null: false
+  end
+
+  create_table "lessons", force: :cascade do |t|
+    t.string "title"
+    t.string "lesson"
+    t.integer "user_id"
+    t.integer "language_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["language_id"], name: "index_lessons_on_language_id"
+    t.index ["user_id"], name: "index_lessons_on_user_id"
+  end
+
+  create_table "lessons_words", id: false, force: :cascade do |t|
+    t.integer "lesson_id", null: false
+    t.integer "word_id", null: false
   end
 
   create_table "lists", force: :cascade do |t|
